@@ -14,11 +14,11 @@ if 'history' not in st.session_state:
 # --- 상단 네비게이션 버튼 (우측 정렬 느낌) ---
 nav_col1, nav_col2, nav_col3 = st.columns([7, 1.5, 1.5])
 with nav_col2:
-    if st.button("🧮 Calculator", use_container_width=True):
+    if st.button("🧮 스나후보계산기", use_container_width=True):
         st.session_state.page = 'Calculator'
         st.rerun()
 with nav_col3:
-    if st.button("📜 Instrument", use_container_width=True):
+    if st.button("📜 설명서", use_container_width=True):
         st.session_state.page = 'Instrument'
         st.rerun()
 
