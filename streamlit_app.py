@@ -28,78 +28,26 @@ st.markdown("---")
 if st.session_state.page == 'Instrument':
     st.header("📜 스나이핑 지표 설명서 (Instrument)")
     
-   def show_manual():
-    st.header("📘 서비스 이용 가이드")
-    
-    # 9타입 매트릭스 시각화 (HTML/CSS 사용)
-    st.subheader("1. 9타입 매트릭스 판정표")
-    
-    matrix_html = """
-    <style>
-        .matrix-table { width: 100%; text-align: center; border-collapse: collapse; font-family: sans-serif; }
-        .matrix-table td { border: 1px solid #ddd; padding: 10px; width: 25%; }
-        .header-y { background-color: #f8f9fa; font-weight: bold; }
-        .header-x { background-color: #f8f9fa; font-weight: bold; }
-        .s-core { background-color: #ff4b4b; color: white; font-weight: bold; }
-        .maybe { background-color: #ffa500; color: white; }
-        .filter { background-color: #f1f1f1; color: #888; }
-    </style>
-    <table class="matrix-table">
-        <tr>
-            <td class="header-y">토양 \ 사건</td>
-            <td class="header-x">S (Sniper Core)</td>
-            <td class="header-x">M (Maybe)</td>
-            <td class="header-x">F (Filter Out)</td>
-        </tr>
-        <tr>
-            <td class="header-y">A (High Vitality)</td>
-            <td class="s-core">A-S (최우수)</td>
-            <td class="maybe">A-M (주력)</td>
-            <td class="filter">A-F (안정)</td>
-        </tr>
-        <tr>
-            <td class="header-y">B (Potential)</td>
-            <td class="maybe">B-S (전략)</td>
-            <td class="maybe">B-M (참고)</td>
-            <td class="filter">B-F (하위)</td>
-        </tr>
-        <tr>
-            <td class="header-y">C (Low Priority)</td>
-            <td class="filter">C-S (로또)</td>
-            <td class="filter">C-M (희박)</td>
-            <td class="filter">C-F (제외)</td>
-        </tr>
-    </table>
-    """
-    st.markdown(matrix_html, unsafe_allow_html=True)
-
-    # 지표 상세 설명
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        st.info("**지속펑크지수 (Consistency)**")
-        st.write("""
-        - **철학**: 꾸준히 잘 빠지는 '비옥한 토양'인가?
-        - **산식**: $Average_{3y} \\times (1 - Volatility)$
-        - **A(0.8↑)**: 최상급 토양. 3년 내내 안정적 유출.
-        - **C(0.4↓)**: 딱딱한 토양. 붕괴 가능성 낮음.
-        """)
-        
-    with col2:
-        st.warning("**폭발펑크지수 (Explosion)**")
-        st.write("""
-        - **철학**: 입결이 완전히 무너진 '이상치'가 있는가?
-        - **산식**: $Max(60\%) + Gap(25\%) + Range(15\%)$
-        - **S(1.3↑)**: 찐 스나 타겟. 보상 확실.
-        - **F(0.8↓)**: 변동성 작음. 분석 제외.
+    col_a, col_b = st.columns(2)
+    with col_a:
+        st.subheader("1. 지속펑크지수 (Sustainability)")
+        st.write("**'이 학과의 펑크 토양이 얼마나 비옥하고 꾸준한가?'**를 측정합니다.")
+        st.info("수식: (최소비율 * 0.5) + (중앙값 * 0.3) + (3년평균 * 0.2)")
+        st.markdown("""
+        - **A (High Vitality):** 3년 내내 추합이 안정적으로 발생하는 최상급 토양
+        - **B (Potential):** 상황에 따라 전략적 접근이 필요한 중간 토양
+        - **C (Low Priority):** 추합이 적어 선이 잘 붕괴되지 않는 딱딱한 토양
         """)
 
-# 사이드바 메뉴나 탭으로 구성
-menu = st.sidebar.selectbox("메뉴", ["분석기", "설명서"])
-if menu == "설명서":
-    show_manual()
-
-
+    with col_b:
+        st.subheader("2. 폭발펑크지수 (Explosion)")
+        st.write("**'한 번 터질 때 얼마나 미친 듯이 무너지는가?'**를 측정합니다.")
+        st.warning("수식: (최대비율 * 0.6) + (최대-중앙 * 0.25) + (변동폭 * 0.15)")
+        st.markdown("""
+        - **S (Sniper Core):** 과거에 합격선이 완전히 무너진 경험이 있는 찐 타겟
+        - **M (Maybe):** 조건이 맞으면 언제든 사고를 칠 잠재력이 있는 그룹
+        - **F (Filter Out):** 변동성이 작아 대박을 기대하기 힘든 분석 제외 그룹
+        """)
 
 # --- CASE 2: 계산기 페이지 (Calculator) ---
 else:
